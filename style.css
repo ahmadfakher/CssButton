@@ -1,0 +1,118 @@
+@property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@property --bgcolor {
+    syntax: "<color>";
+    initial-value: rgb(255, 255, 255);
+    inherits: false;
+}
+
+body {
+    --bgcolor: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bgcolor);
+}
+
+body:has(.toggle input:checked) {
+    --bgcolor: rgb(44, 44, 44);
+    color: white;
+}
+
+.wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.05s ease-in-out;
+}
+
+.wrapper:active {
+    scale: 0.9;
+    transition: 0.05s ease-in-out;
+}
+
+.gradient {
+    width: 230px;
+    height: 100px;
+    position: absolute;
+    z-index: -2;
+    opacity: 0.8;
+    border-radius: 25px;
+    filter: blur(10px);
+    background: conic-gradient(from var(--gradient-angle),
+            #bd88ed,
+            #93dee0,
+            #d6e292,
+            #de8b8d,
+            #93a1e9,
+            #bd88ed);
+    animation: rotateGradient 5s linear infinite;
+}
+
+@keyframes rotateGradient {
+    0% {
+        --gradient-angle: 0deg;
+    }
+
+    100% {
+        --gradient-angle: 360deg;
+    }
+}
+
+.glass {
+    background: rgb(206, 206, 206, 0.4);
+    width: 220px;
+    height: 90px;
+    border-radius: 20px;
+    box-shadow: 0px 2px 3px rgb(255, 255, 255, 0.6) inset, 0px -2px 2px rgb(255, 255, 255, 0.6) inset;
+    position: absolute;
+    z-index: -1;
+}
+
+.background {
+    width: 200px;
+    height: 70px;
+    background-image: linear-gradient(to top, #333333, #424242);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
+}
+
+.button {
+    width: 175px;
+    height: 50px;
+    background-image: linear-gradient(to bottom, #333333, #424242);
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-text {
+    color: white;
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 20px;
+}
+
+.toggle {
+    position: absolute;
+    bottom: 2%;
+    right: 2%;
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.toggle input{
+    margin-top: 6px;
+}
